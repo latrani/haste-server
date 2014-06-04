@@ -214,7 +214,7 @@ haste.prototype.loadDocument = function(key) {
       _this.setTitle(ret.key);
       _this.fullKey();
       _this.$textarea.val('').hide();
-      _this.$box.show().focus();
+      _this.$box.show();
       _this.addLineNumbers(ret.lineCount);
     }
     else {
@@ -333,12 +333,12 @@ haste.prototype.configureButton = function(options) {
   options.$where.mouseenter(function(evt) {
     $('#box3 .label').text(options.label);
     $('#box3 .shortcut').text(options.shortcutDescription || '');
-    $('#box3').show();
     $(this).append($('#pointer').remove().show());
   });
   // Hide the label
   options.$where.mouseleave(function(evt) {
-    $('#box3').hide();
+    $('#box3 .label').text("");
+    $('#box3 .shortcut').text("");
     $('#pointer').hide();
   });
 };
@@ -358,6 +358,27 @@ haste.prototype.configureShortcuts = function() {
     }
   });
 };
+
+$(function() {
+
+  // Yes, this is a shoddy excuse for responsive design. But it'll do, until
+  // I decide to rewrite the whole app in angular or something.
+  var setBoxWidth = function() {
+    var fullWidth = $('body').width();
+    if (fullWidth > 600) {
+      boxWidth = fullWidth - $("#key").width();
+      $("#key").css({"top": 0, "bottom": "auto"});
+    }
+    else {
+      boxWidth = fullWidth;
+      $("#key").css({"top": "auto", "bottom": 0, "opacity": 0.75});
+    }
+    $('#box').width(boxWidth);
+    $('textarea').width(boxWidth);
+  }
+  setBoxWidth();
+  $(window).resize(setBoxWidth);
+});
 
 ///// Tab behavior in the textarea - 2 spaces per tab
 $(function() {

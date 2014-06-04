@@ -1,6 +1,6 @@
 body {
 	background: #002B36;
-	padding: 20px 50px;
+	padding: 20px 20px;
 	margin: 0px;
 }
 
@@ -23,6 +23,7 @@ textarea {
 
 #linenos {
   color: #7d7d7d;
+	display: none;
 	z-index: -1000;
 	position: absolute;
 	top: 20px;
@@ -42,7 +43,11 @@ textarea {
 	border: 0px;
 	outline: none;
 	font-size: 13px;
-	padding-right: 360px;
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 #box code {
@@ -116,7 +121,23 @@ textarea {
 	font-family: Helvetica, sans-serif;
 	font-size: 12px;
 	line-height: 14px;
+}
+
+#box3 {
+	background: #002B36;
+	padding: 5px 15px 10px 15px;
+}
+
+#box3 div {
+	height: 14px;
+}
+#messages li {
+	background: #173e48;
 	padding: 10px 15px;
+}
+
+#messages li {
+	background: #173e48;
 }
 
 #box3 .label, #messages li {
