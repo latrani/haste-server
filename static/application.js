@@ -26,17 +26,17 @@ haste_document.prototype.load = function(key, callback, lang) {
       try {
         var high;
         if (lang === 'txt') {
-          high = { value: _this.htmlEscape(res.data) };
+          high = { value: _this.htmlEscape(res.data), lang: 'txt' };
         }
         else if (lang) {
           high = hljs.highlight(lang, res.data);
         }
         else {
-          high = hljs.highlightAuto(res.data);
+          high = { value: _this.htmlEscape(res.data), lang: 'txt' };
         }
       } catch(err) {
-        // failed highlight, fall back on auto
-        high = hljs.highlightAuto(res.data);
+        // failed highlight, fall back on plain
+        high = { value: _this.htmlEscape(res.data), lang: 'txt' };
       }
       callback({
         value: high.value,
@@ -70,7 +70,6 @@ haste_document.prototype.save = function(data, callback) {
       callback(null, {
         value: high.value,
         key: res.key,
-        language: 'txt',
         lineCount: data.split("\n").length
       });
     },
