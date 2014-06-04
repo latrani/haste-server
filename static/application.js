@@ -66,11 +66,11 @@ haste_document.prototype.save = function(data, callback) {
     success: function(res) {
       _this.locked = true;
       _this.key = res.key;
-      var high = hljs.highlightAuto(data);
+      var high = { value: _this.htmlEscape(data) };
       callback(null, {
         value: high.value,
         key: res.key,
-        language: high.language,
+        language: 'txt',
         lineCount: data.split("\n").length
       });
     },
@@ -275,7 +275,7 @@ haste.prototype.configureButtons = function() {
       $where: $('#box2 .new'),
       label: 'New',
       shortcut: function(evt) {
-        return evt.ctrlKey && evt.keyCode === 78  
+        return evt.ctrlKey && evt.keyCode === 78
       },
       shortcutDescription: 'control + n',
       action: function() {
